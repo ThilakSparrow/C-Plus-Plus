@@ -1,307 +1,325 @@
-#include <iostream>
+#include<iostream>
 
 using namespace std;
 
-struct node
+struct node 
 
 {
 
-    int data;
+   int data ;
 
-    struct node* next;
+   struct node *next ;
 
 };
 
-int n, cnt=0;
+int cnt=0,n;
 
-struct node *first, *temp, *p;
+struct node *first, *temp, *p ,*q;
 
-void create()
+void create ()
 
 {
 
-    first=new node;
+   int ch;
 
-    cout<<"\n\t ENTER DATA : ";
+   struct node *first; 
 
-    cin>>n;
+   first = new node ;
 
-    first->data=n;
+   cout <<"\n\t ENTER DATA:";
 
-    first->next=NULL;
+   cin >>n;
 
-    cnt=1;
+   first->data =n;
+
+   first->next =first ;
+
+   cnt =1;
 
 }
 
-void insertfirst()
+void insertfirst ()
 
 {
 
-    p=new node;
+   int n;
 
-    cout<<"\n\t ENTER DATA FOR 1ST NODE";
+   p = new node;
 
-    cin>>n;
+   cout <<"\n\t ENTER DATA FOR 1ST NODE";
 
-    p->data=n;
+   cin >>n;
 
-    p->next=first;
+   p->data = n;
 
-    first=p;
+   p->next = first-> next ;
 
-    cnt++;
+   first-> next= p;
 
-    cout<<"\tELEMENT SUCCESSFULLY ADDED";
+   cnt ++;
+
+   cout <<"\t ELEMENT SUCCESSFULLY ADDED";
 
 }
 
-void insertlast()
+void insertlast ()
 
 {
 
-    p=new node;
+   p=new node ;
 
-    cout<<"\n\t ENTER DATA FOR LAST NODE";
+   cout <<"\n\t ENTER DATA FOR LAST NODE";
 
-    cin>>n;
+   cin >>n;
 
-    p->data=n;
+   p->data =n;
 
-    temp=first;
+   temp =first;
 
-    while(temp->next!=0)
+   while (temp->next!=first)
 
-    {
+   {
 
-        temp=temp->next;
+       temp = temp->next ;
 
     }
 
-    temp->next=p;
+    temp->next =p;
 
-    p->next=0;
+    p->next =first;
 
-    cnt++;
+    cnt ++;
 
-    cout<<"\tELEMENT SUCCESSFULLY ADDED";
+    cout <<"\t ELEMENT  SUCCESSFULLY  ADDED";
 
 }
 
-void insertafter()
+void insertafter ()
 
 {
 
-    int add,t;
+   int t,add;
 
-    cout<<"\n\t ENTER ANY ADDRESS BETWEEN 1 and "<<cnt;
+   cout <<"\n\t ELEMENT ANY ADDRESS BETWEEN 1 and "<< cnt ;
 
-    cin>>add;
+   cin >>add ;
+
+   t=1;
+
+   p=first ;
+
+   while (t!=add)//while (t!=add-1)Before 
+
+   {
+
+       p=p->next ;
+
+       t++;
+
+    }
+
+    temp =new node ;
+
+    cout <<"\n\t ENTER  DATA  FOR NODE";
+
+    cin >>n;
+
+    temp-> data =n;
+
+    temp-> next =p-> next ;
+
+    p-> next =temp ;
+
+    cnt ++;
+
+    cout <<"\t ELEMENT SUCCESSFULLY ADDED";
+
+}
+
+void deletefirst ()
+
+{
+
+   p=first ;
+
+   q=first ;
+
+   while (p->next!=first)
+
+   {
+
+       p=p->next;
+
+    }
+
+    first =q-> next ;
+
+    p->next =first ;
+
+   free (q);
+
+   cnt--;
+
+   cout<<"\t ELEMENT SUCCESSFULLY DELETED ";
+
+}
+
+void deletelast ()
+
+{
+
+   p=first;
+
+   while (p->next->next!=first)
+
+   {
+
+      p=p->next ;
+
+    }
+
+    free(p->next); 
+
+    p->next=first ;
+
+    cnt-- ;
+
+    cout <<"\t ELEMENT SUCCESSFULLY DELETED";
+
+}
+
+void deleteafter ()
+
+{
+
+    int add, t;
+
+    cout <<"\n\t ENTER ANY ADDRESS BETWEEN 1 and "<<cnt ;
+
+    cin >>add ;
 
     t=1;
 
-    p=first;
+    p=first ;
 
-    while(t!=add) //while(t!=add-1) Before
+    while (t<add-1)
 
     {
 
-        p=p->next;
+       p=p->next;
 
-        t++;
+       t++;
 
     }
 
-    temp=new node;
+    temp =p->next ;
 
-    cout<<"\n\t ENTER DATA FOR NODE";
+    p->next =temp->next ;
 
-    cin>>n;
-
-    temp->data=n;
-
-    temp->next=p->next;
-
-    p->next=temp;
-
-    cnt++;
-
-    cout<<"\tELEMENT SUCCESSFULLY ADDED";
-
-}
-
-void deletefirst()
-
-{
-
-    p=first;
-
-    first=p->next;
-
-    free(p);
+    free (temp);
 
     cnt--;
 
-    cout<<"\t ELEMENT SUCCESSFULLY DELETED";
+    cout <<"\t ELEMENT SUCCESSFULLY DELETED";
 
 }
 
-void deletelast()
+void display ()
 
 {
 
-    p=first;
+   p=first ;
 
-    while(p->next->next!=0)
+   while (p->next!=first)
 
-    {
+   {
 
-        p=p->next;
+       cout<<"\n\t"<<p->data ;
+
+       p=p->next;
 
     }
 
-    p->next=0;
-
-    free(p->next);
-
-    cnt--;
-
-    cout<<"\tELEMENT SUCCESSFULLY DELETED";
+    cout <<"\n Total no.of Nodes Present in a list:"<<cnt ;
 
 }
 
-void deleteafter()
+int main ()
 
 {
 
-    int add,t;
+   int i ;
 
-    cout<<"\n\t ENTER ANY ADDRESS BETWEEN 1 and"<<cnt;
+   while (1)
 
-    cin>>add;
+   {
 
-    t=1;
+       cout <<"1. create \t 2. insertfirst \t 3. insertlast \t 4. insertafter \t 5. deletefirst \t 6. deletelast \t 7. deleteafter \t 8. display \t 9. exit \n";
 
-    p=first;
+       cout <<"Enter Your Choice ";
 
-    while(t<add-1)
+       cin >>i ;
 
-    {
+       switch (i)
 
-        p=p->next;
+       {
 
-        t++;
+           case 1:
 
-    }
+              create ();
 
-    temp=p->next;
+              break ;
 
-    p->next=temp->next;
+           case 2:
 
-    free(temp);
+              insertfirst();
 
-    cnt--;
+              break ;
 
-    cout<<"\tELEMENT SUCCESSFULLY DELETED";
+           case 3:
 
-}
+              insertlast ();
 
-void display()
+              break ;
 
-{
+           case 4:
 
-    p=first;
+              insertafter ();
 
-    while(p!=0)
+              break ;
 
-    {
+           case 5:
 
-        cout<<"\n\t"<<p->data;
+              deletefirst ();
 
-         p=p->next;
+              break ;
 
-    }
+           case 6:
 
-    cout<<"\nTotal no. of Nodes present in a list:"<<cnt<<"\n";
+              deletelast ();
 
-}
+              break ;
 
-int main()
+           case 7:
 
-{
+              deleteafter ();
 
-    int i;
+              break;
 
-    while(1)
+           case 8:
 
-    {
+              display ();
 
-        cout<<"1.Create\t 2.Insert first 3. ...9.exit\n";
+              break ;
 
-        cout<<"Enter Your Choice";
+           default:
 
-        cin>>i;
+              exit (0);
 
-        switch(i)
+            }
 
-        {
+      }
 
-            case 1:
-
-                create();
-
-                break;
-
-            case 2:
-
-                insertfirst();
-
-                break;
-
-            case 3:
-
-                insertlast();
-
-                break;
-
-            case 4:
-
-                insertafter();
-
-                break;
-
-            case 5:
-
-                deletefirst();
-
-                break;
-
-            case 6:
-
-                deletelast();
-
-                break;
-
-            case 7:
-
-                deleteafter();
-
-                break;
-
-            case 8:
-
-                display();
-
-                break;
-
-            default:
-
-                exit(0);
-
-        }
-
-    }
-
-return 0;
+    return 0;
 
 }
