@@ -1,6 +1,6 @@
-#C++ program to zoom digits of an integer
+# C++ program to zoom digits of an integer
 
-###Program:
+## Program:
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -214,7 +214,7 @@ int main()
 
 ```
 
-###Ouput:
+## Output:
 ```cpp
 @@@@
 @  @
